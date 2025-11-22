@@ -58,7 +58,7 @@ nikita@DESKTOP-K9L6F97:~/work$ curl -s http://api.localhost/cache
 
 Traefik доступен через веб-интерфейс:
 
-*(На скриншоте видно, что Entrypoints :80 активен, Routers: 4, Services: 7)*
+![На скриншоте видно, что Entrypoints :80 активен, Routers: 4, Services: 7](image/photo_1.jpg)
 
 -----
 
@@ -68,9 +68,11 @@ Traefik доступен через веб-интерфейс:
 
 После того, как я прописал порты, я смог перейти по `localhost:8080` и попасть на Adminer:
 
+![Страницы adminer](image/photo_2.jpg)
+
 Получилось зайти в базу данных:
 
-*(База данных appdb, схема public, таблиц пока нет)*
+![База данных appdb, схема public, таблиц пока нет](image/photo_3.jpg)
 
 -----
 
@@ -92,6 +94,7 @@ adminer:
 ```
 
 После добавления этой строчки (`traefik.docker.network=elite-stack_public`), я смог перейти по адресу `adminer.localhost`:
+![Страница adminer](image/photo_4.jpg)
 
 -----
 
