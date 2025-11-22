@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    command: ["--docker_only=true"]
+    networks: [backend]
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks: [public, backend]
+    labels:
+      - traefik.http.routers.prom.rule=Host(`prometheus.localhost`)
+      - traefik.http.services.prom.loadbalancer.server.port=9090
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+    volumes:
+      - ./observability/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./observability/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    networks: [public, backend]
+    labels:
+      - traefik.http.routers.grafana.rule=Host(`grafana.localhost`)
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+
+volumes:
+  grafana-data:
+
+networks:
+  public:
+    external: false
+  backend:
+    external: false
+

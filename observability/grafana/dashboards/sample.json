@@ -1,0 +1,25 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Prometheus up by job",
+      "targets": [ { "expr": "up", "legendFormat": "{{job}}" } ],
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0}
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["lab2"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Sample — Prometheus basics",
+  "version": 1
+}
+

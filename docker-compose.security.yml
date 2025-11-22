@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  api:
+    labels:
+      - traefik.http.middlewares.auth.basicauth.users=${BASIC_AUTH_USERS}
+      - traefik.http.middlewares.ratelimit.ratelimit.average=5
+      - traefik.http.middlewares.ratelimit.ratelimit.burst=10
+      - traefik.http.routers.api.middlewares=auth@docker,ratelimit@docker
+
+  grafana:
+    labels:
+      - traefik.http.routers.grafana.middlewares=auth@docker,ratelimit@docker
+
+  prometheus:
+    labels:
+      - traefik.http.routers.prom.middlewares=auth@docker,ratelimit@docker
+
+  adminer:
+    labels:
+      - traefik.http.routers.adminer.middlewares=auth@docker,ratelimit@docker
+
